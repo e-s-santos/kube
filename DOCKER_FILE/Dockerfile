@@ -1,5 +1,7 @@
 FROM python  
-CMD ls 
-ADD back.py /etc/
-RUN while [ : ] ; do echo "abc" ; done 
+MAINTAINER Teste
+CMD yes | apt install python3-pip 
+ADD back.py /opt/
+WORKDIR /opt
+RUN python back.py 
 EXPOSE 7070
