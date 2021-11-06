@@ -1,3 +1,5 @@
 FROM python  
+CMD ls 
 ADD back.py /etc/
-RUN python /etc/back.py
+RUN while [ : ] ; do echo "abc" ; done 
+EXPOSE 7070
