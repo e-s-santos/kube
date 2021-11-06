@@ -1,0 +1,67 @@
+# Docker 
+Novo: Docker <comando> <sub comando> (opt)
+Classico: docker <comando> (opt)
+...............
+docker version (detalhado)  / docker --version (novo) 
+docker info - informações generalizada
+docker images ls - lista os containers na máquina 
+docker container ls - lista os containers 
+............... 
+
+Versões do docker cli e engine. 
+Arquitetura docker 
+Comandos de gerenciamento
+
+
+# criou um container do nginx 
+docker container run --publish 80:80 nginx
+docker container run --name apache -d --publish 83:80 httpd
+
+# faz o download da imagem para maquina local 
+docker pull httpd
+
+#vendo log docker  
+docker container logs  < nome container> 
+
+# docker container top < container> 
+docker container top apache
+
+# parando um container 
+docker container stop <container> 
+
+
+#Desafios e outros 
+docker container run -d --name nginx_desafio --publish 84:80 nginx
+docker container run -d --name httpd_desafio --publish 8080:80 httpd
+docker container run -d --name mysql_desafios -e MYSQL_RANDOM_ROOT_PASSWORD=yes --publish 3306:3306 mysql 
+
+
+docker image history nginx:1.14.2 #ver o log dessa imagem 
+docker image inspect nginx #ver todo o detalhamento da imagem e definições sobre ela. 
+
+#conectando no container 
+docker exec -it db bash 
+
+# Para remover os containers desejados 
+docker rm <container> 
+
+#tagueando a imagem 
+docker image tag <image> <tag>
+
+#Fazendo push 
+docker login
+docker image push <tag, nome> 
+
+
+o que é uma imagem docker: 
+    Conjunto de binários e dependencias para a sua aplicação 
+    Um conjunto de metadados que contem informações sobre como executar a imagem 
+    pequena, como um binario para executar a sua aplicação. 
+    Não é um S.O completo 
+
+Ulizar o Docker Hub Registry 
+
+Gerenciando Imagens Locais 
+
+
+
