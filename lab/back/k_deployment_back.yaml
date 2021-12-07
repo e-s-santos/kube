@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: backend
+spec: 
+  replicas: 1 
+  template: 
+    metadata:
+      name: backend 
+      labels:
+        app: backend
+    spec: 
+      containers:
+      - name: backend
+        image: essantos70/emsantos70:back_v2
+        envFrom:
+          - configMapRef:
+              name: confimapbackend
+        volumeMounts:
+          - mountPath: /dataset/
+            name: dataset
+        ports: 
+          - containerPort: 80
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "70m"
+          limits:
+            memory: "300Mi"
+            cpu: "200m"
+      volumes:
+      - name: dataset
+        hostPath: 
+          path: /dataset/
+          type: DirectoryOrCreate 
+  selector:
+    matchLabels:
+      app: backend  

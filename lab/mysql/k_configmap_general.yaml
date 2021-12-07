@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: configmapgeneral
+data:
+  db_user: root
+  db_pass: passwordRoot
+  db_addres: 10.110.141.227
+  db: mimosa
+ 

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: configmapconecta
+data: 
+  db_user: root
+  db_pass: passwordRoot
+  db_address: 10.110.141.227
+  db_name: mimosa 

@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob 
+metadata:
+  name: cronanalise
+spec: 
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec: 
+      template:
+        spec: 
+          containers: 
+          - name: con
+            image: essantos70/emsantos70:v1_job
+            envFrom:
+              - configMapRef:
+                  name: cronconfigmap 
+            imagePullPolicy: IfNotPresent
+              #concurrencyPolicy: Forbid
+          restartPolicy: Never #OnFailure

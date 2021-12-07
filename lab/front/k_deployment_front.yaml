@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: frontend
+spec: 
+  replicas: 1 
+  template: 
+    metadata:
+      name: frontend 
+      labels:
+        app: frontend
+    spec: 
+      containers:
+      - name: frontend
+        image: essantos70/emsantos70:v2_front
+        volumeMounts:
+        - mountPath: /dataset/
+          name: teste-volume
+        - mountPath: /var/www/html/arquivo/
+          name: conecta
+        ports: 
+          - containerPort: 80
+        resources:
+          requests:
+            memory: "50Mi"
+            cpu: "10m"
+          limits: 
+            memory: "51Mi"
+            cpu: "15m" 
+      volumes:
+      - name: teste-volume
+        hostPath:
+          path: /dataset/
+          type: DirectoryOrCreate
+      - name: conecta
+        hostPath: 
+          path: /volume/
+          type: DirectoryOrCreate 
+  selector:
+    matchLabels:
+      app: frontend  

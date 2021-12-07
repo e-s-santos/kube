@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob 
+metadata:
+  name: conecta
+spec: 
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec: 
+      template:
+        spec: 
+          containers: 
+          - name: conecta
+            image: essantos70/emsantos70:v1_conecta
+            envFrom: 
+              - configMapRef:
+                  name: configmapconecta 
+            volumeMounts:
+              - mountPath: /tmp/
+                name: volume
+          volumes: 
+          - name: volume
+            hostPath: 
+              path: /volume/
+              type: DirectoryOrCreate
+          restartPolicy: OnFailure

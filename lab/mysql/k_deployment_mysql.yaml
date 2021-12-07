@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  mysql-svc
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3306
+  selector: 
+    app: mysql
+    #selector:
+    #app: mysql
+    # ports:
+    #- port: 3306
+    #  targetPort: 3306
+    #  name: "baixa"
+    #  nodePort: 30011
+    #- port: 33060
+    #  targetPort: 33060
+    #  name: "alta"
+    #  nodePort: 30012
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmysql
+data:
+  MYSQL_ROOT_PASSWORD: passwordRoot
+  MYSQL_USER: lab
+  MYSQL_PASSWORD: passwordRoot
+  MYSQL_DATABASE: mimosa
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: mysql
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: database-volume
+        ports:
+          - containerPort: 3306
+            #targetPort: 3306
+            #- containerPort: 33060
+            #targetPort: 33060
+        envFrom:
+        - configMapRef:
+            name: configmysql
+      volumes:
+      - name: database-volume
+        hostPath:
+          path: /mimosaDatabase
+          type: DirectoryOrCreate
+  selector:
+    matchLabels:
+      app: mysql
+
