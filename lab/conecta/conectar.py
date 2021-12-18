@@ -3,7 +3,7 @@ import mysql.connector as db
 import os
 
 db_user = str( os.environ['db_user'] )  
-db_pass =  str(  os.environ['db_pass'] )
+db_pass =  str(  os.environ['pass'] )
 db_address =  str(  os.environ['db_address'] )
 db_name =  str( os.environ['db_name']  )
 

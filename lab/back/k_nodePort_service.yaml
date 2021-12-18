@@ -4,6 +4,7 @@ metadata:
   name: backservice
 spec:
   type: NodePort
+  clusterIP: 10.110.52.187
   selector:
     app: backend
   ports:

@@ -6,9 +6,10 @@ import time as t
 
 #while True:
 db_user = str( os.environ['db_user'] ) 
-db_pass = str( os.environ['db_pass'] ) 
-db_address = str( os.environ['db_addres'] ) 
+db_pass = str( os.environ['pass'] ) 
+db_address = str( os.environ['db_address'] ) 
 dbase = str( os.environ['db'] )
+ipback = str( os.environ['ipback'] ) 
 #wstime = int( os.environ['wstime'] )
 print("User") 
 print(db_user)
@@ -36,7 +37,7 @@ for val in range(1):
             arq = i[0]
         #cursor.commit()
             #cur.execute("update arquivo set verif = 1 where arquivo = '"+arq+"'") 
-            os.system("curl --location --request POST 'http://192.168.1.14:30008/analise' --header 'Content-Type: application/json'  --data-raw '{\"fileName\": \""+arq+ "\"}'")
+            os.system("curl --location --request POST 'http://"+ipback+":30008/analise' --header 'Content-Type: application/json'  --data-raw '{\"fileName\": \""+arq+ "\"}'")
         cursor.commit()
         #print( )
         #call("curl --location --request POST 'http://192.168.1.14:30008/analise' --header 'Content-Type: application/json'  --data-raw '{\"fileName\": \" "+arq+ " \"}'", shell=True)

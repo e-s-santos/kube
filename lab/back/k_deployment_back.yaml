@@ -13,6 +13,17 @@ spec:
       containers:
       - name: backend
         image: essantos70/emsantos70:back_v2
+        env:
+          - name: db_address
+            valueFrom:
+              configMapKeyRef:
+                name: configmapgeneral
+                key: db_address
+          - name: pass
+            valueFrom:
+              secretKeyRef:
+                name: db-user-pass
+                key: pass
         envFrom:
           - configMapRef:
               name: confimapbackend
@@ -24,10 +35,10 @@ spec:
         resources:
           requests:
             memory: "200Mi"
-            cpu: "70m"
+            cpu: "40m"
           limits:
             memory: "300Mi"
-            cpu: "200m"
+            cpu: "100m"
       volumes:
       - name: dataset
         hostPath: 

@@ -5,7 +5,7 @@ metadata:
 data: 
   db_user: root
   db_pass: passwordRoot
-  db_addres: 10.110.141.227
+    #db_addres: 10.105.146.228
   db: mimosa
     #wstime: "15"
   

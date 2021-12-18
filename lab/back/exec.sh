@@ -11,5 +11,4 @@ kubectl apply -f  k_deployment_back.yaml
 kubectl apply -f  k_hpa_service.yaml
 kubectl apply -f  k_load_balance_service.yaml
 kubectl apply -f  k_configmap_back.yaml
-# k_nodePort_service.yaml
 

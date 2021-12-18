@@ -12,6 +12,17 @@ spec:
           containers: 
           - name: conecta
             image: essantos70/emsantos70:v1_conecta
+            env:
+              - name: db_address
+                valueFrom:
+                  configMapKeyRef:
+                    name: configmapgeneral
+                    key: db_address
+              - name: pass
+                valueFrom: 
+                  secretKeyRef:
+                    name: db-user-pass
+                    key: pass
             envFrom: 
               - configMapRef:
                   name: configmapconecta 

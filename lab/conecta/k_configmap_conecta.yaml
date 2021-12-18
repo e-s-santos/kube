@@ -5,5 +5,5 @@ metadata:
 data: 
   db_user: root
   db_pass: passwordRoot
-  db_address: 10.110.141.227
+  db_address: 10.105.146.228
   db_name: mimosa 

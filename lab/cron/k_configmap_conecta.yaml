@@ -5,6 +5,7 @@ metadata:
 data: 
   db_user: root
   db_pass: passwordRoot
-  db_addres: 10.110.141.227
+    # db_addres: 10.100.92.188
   db: mimosa
+  ipback: 192.168.1.9
   wstime: "15"

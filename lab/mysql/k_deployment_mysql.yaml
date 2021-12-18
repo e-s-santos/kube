@@ -8,17 +8,7 @@ spec:
     - port: 3306
   selector: 
     app: mysql
-    #selector:
-    #app: mysql
-    # ports:
-    #- port: 3306
-    #  targetPort: 3306
-    #  name: "baixa"
-    #  nodePort: 30011
-    #- port: 33060
-    #  targetPort: 33060
-    #  name: "alta"
-    #  nodePort: 30012
+  clusterIP: 10.104.233.100
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -29,6 +19,7 @@ data:
   MYSQL_USER: lab
   MYSQL_PASSWORD: passwordRoot
   MYSQL_DATABASE: mimosa
+  MYSQL_ROOT_HOST: '%'
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -50,12 +41,39 @@ spec:
           name: database-volume
         ports:
           - containerPort: 3306
-            #targetPort: 3306
-            #- containerPort: 33060
-            #targetPort: 33060
-        envFrom:
-        - configMapRef:
-            name: configmysql
+          - containerPort: 33060
+        env: 
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom: 
+              configMapKeyRef:
+                name: configmysql
+                key: MYSQL_ROOT_PASSWORD
+          - name: MYSQL_USER
+            valueFrom:
+              configMapKeyRef:
+                name: configmysql
+                key: MYSQL_USER
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: configmysql
+                key: MYSQL_PASSWORD
+          - name: MYSQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: configmysql
+                key: MYSQL_DATABASE
+          - name: MYSQL_ROOT_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: configmysql
+                key: MYSQL_ROOT_HOST           
+            #envFrom:
+            # configMapKeyRef:
+            #name: configmysql
+            #key: MYSQL_ROOT_PASSWORD
+          #- configMapRef:
+          #  name: configmysql
       volumes:
       - name: database-volume
         hostPath:

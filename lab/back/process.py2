@@ -2,14 +2,9 @@ import pandas as pd
 import numpy as np
 import sklearn
 import os
-import socket
 from sklearn.model_selection import train_test_split
 import statsmodels.api as st
 import mysql.connector as db
-import logging as log
-
-hostname = socket.gethostname()
-log.basicConfig(filename='/dataset/'+hostname+'tratamento.log', encoding='utf-8', level=log.DEBUG)
 
 
 def logModel(column,x_train, y_train):
@@ -19,12 +14,12 @@ def logModel(column,x_train, y_train):
 #---------------------------------------------------
 
 def writeF(where, what):
-    log.debug("**********************")
-    log.debug("\nwhere\n")
-    log.debug(where)
-    log.debug("\nwhat\n")
-    log.debug(what)
-    log.debug("*********************")
+    print("**********************") 
+    print("\nwhere\n") 
+    print(where) 
+    print("\nwhat\n")
+    print(what) 
+    print("*********************")
     arquivo = open(where,'w+')
     arquivo.writelines(what)
     arquivo.close()
@@ -32,10 +27,8 @@ def writeF(where, what):
 #---------------------------------------------------
 def tratamento(file) :
     path = os.environ['dataset']
-    log.debug ("*****")
-    log.debug (os.environ['dataset'])
-    print( path+file )
-    log.debug( path+file )
+    print ("*****")
+    print (os.environ['dataset'])
     from sklearn.model_selection import train_test_split
     import statsmodels.api as st
     data = pd.read_csv(path+file)
@@ -92,11 +85,12 @@ def tratamento(file) :
                             _encontrou_ = True
 
             if _encontrou_ == False:
-                    log.debug("Parando o modelo")
+                    print("Parando o modelo")
                     _continue_ = False
             else:
-                    log.debug(f"Remover {rem}")
+                    print(f"Remover {rem}")
                     columns.remove(rem)
             _modelo_ = modelo
     return _modelo_
-
+        
+            
